@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,7 +45,7 @@ dependencies {
     implementation(project(":domain"))
 
     //Koin
-    implementation (libs.koin.android)
+    implementation(libs.koin.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
