@@ -1,0 +1,48 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle
+/build
+!gradle-wrapper.jar
+
+# Kotlin
+.idea
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+*.iml
+*.hprof
+
+# Android
+/captures
+.externalNativeBuild
+
+# IntelliJ
+*.iws
+.idea/.name
+.idea/modules.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/workspace.xml
+*.ipr
+*.iws
+*.iml
+*.hprof
+.DS_Store
+
+# Other
+/local.properties
+/.env
+.gradle/
+.idea/
+/build/
+/captures/
+.externalNativeBuild/
+/cxx/
+local.properties

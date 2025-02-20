@@ -1,0 +1,6 @@
+# Ignore everything in the build directory
+/build
+
+# Uncomment if using the NDK
+# .cxx/
+# .externalNativeBuild/
