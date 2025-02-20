@@ -1,0 +1,37 @@
+# Ignore Gradle files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+**/build/
+.gradle
+**/local.properties
+
+# Ignore IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore other unwanted files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Ignore Java compiled files
+*.class
+
+# Ignore application specific files
+# Example: specific configurations, credentials, or temp files for data module
+config/
+*.properties
+data_sources/
+*.db
+*.json
+
+# If using Room or other database libraries
+**/databases/
