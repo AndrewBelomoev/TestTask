@@ -8,17 +8,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class UsersViewModel(private val getUsersUseCase: GetUsersUseCase): ViewModel() {
-
+class UsersViewModel(private val getUsersUseCase: GetUsersUseCase) : ViewModel() {
     private val _users = MutableStateFlow<List<User>>(emptyList())
     val users: StateFlow<List<User>> get() = _users
 
-    fun fetchUsers() {
+
+    init {
+        fetchUsers()
+    }
+
+    private fun fetchUsers() {
         viewModelScope.launch {
-            getUsersUseCase.invoke().onSuccess {
-                _users.value = it
+            val result = getUsersUseCase()
+            if (result.isSuccess) {
+                _users.value = result.getOrNull() ?: emptyList()
+            } else {
+                // Error Handling
             }
         }
     }
-
 }
