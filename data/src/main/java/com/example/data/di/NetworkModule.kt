@@ -2,6 +2,7 @@ package com.example.data.di
 
 import com.example.data.api.ApiService
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -17,7 +18,13 @@ internal val networkModule = module {
     }
 
     single(qualifier("API")) {
+
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         val httpClient = OkHttpClient.Builder()
+            .addInterceptor(logging)
             .build()
 
         Retrofit.Builder()

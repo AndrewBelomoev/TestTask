@@ -1,13 +1,15 @@
 package com.example.testtask.presentation.ui.users
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.testtask.R
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testtask.databinding.FragmentUsersBinding
+import com.example.testtask.presentation.adapter.UserAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +19,7 @@ class UsersFragment : Fragment() {
     private val binding get() = requireNotNull(_binding)
 
     private val viewModel by viewModel<UsersViewModel>()
+    private lateinit var userAdapter: UserAdapter
 
 
     override fun onCreateView(
@@ -33,20 +36,32 @@ class UsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-
-            lifecycleScope.launch {
-                viewModel.users.collect {
-                    textField.text = it.toString()
-                }
+            userAdapter = UserAdapter { user ->
+                findNavController().navigate(
+                    directions = UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(
+                        name = user.name ?: "",
+                        email = user.email ?: "",
+                        phone = user.phone ?: "",
+                        city = user.address?.city ?: ""
+                    )
+                )
             }
 
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = userAdapter
+            }
+
+            lifecycleScope.launch {
+                viewModel.users.collect { users ->
+                    userAdapter.submitList(users)
+                }
+            }
         }
-        viewModel.fetchUsers()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
