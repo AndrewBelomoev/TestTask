@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TestTask</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="data_loaded_from_local_database">Data loaded from local database</string>
+    <string name="id_text">ID: 1</string>
+    <string name="user_name_text">Name: User name</string>
+    <string name="test_mail_text">Email: testmail123@testmail.com</string>
 </resources>

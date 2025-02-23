@@ -8,5 +8,4 @@ class GetUsersUseCase(private val repository: RemoteRepository) {
     suspend operator fun invoke(): Result<List<User>> {
         return repository.getUsers()
     }
-
 }

@@ -25,6 +25,9 @@
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details">
         <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
             android:name="name"
             app:argType="string" />
         <argument
