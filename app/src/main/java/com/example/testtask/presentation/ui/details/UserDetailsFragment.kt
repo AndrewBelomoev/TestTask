@@ -31,7 +31,7 @@ class UserDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: UserDetailsFragmentArgs by navArgs()
-        viewModel.setUserDetails(args.name, args.email, args.phone, args.city)
+        viewModel.setUserDetails(args.id,args.name, args.email, args.phone, args.city)
 
         lifecycleScope.launch {
             viewModel.userDetails.collect { userDetails ->

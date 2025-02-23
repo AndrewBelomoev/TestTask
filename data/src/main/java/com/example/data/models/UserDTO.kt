@@ -1,7 +1,7 @@
 package com.example.data.models
 
 internal data class UserDTO(
-    val id: Int? = null,
+    val id: Long,
     val name: String? = null,
     val username: String? = null,
     val email: String? = null,

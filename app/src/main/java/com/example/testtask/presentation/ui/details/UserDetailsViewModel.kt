@@ -10,8 +10,9 @@ class UserDetailsViewModel : ViewModel() {
     private val _userDetails = MutableStateFlow<User?>(null)
     val userDetails: StateFlow<User?> get() = _userDetails
 
-    fun setUserDetails(name: String, email: String, phone: String, city: String) {
+    fun setUserDetails(id: Long, name: String, email: String, phone: String, city: String) {
         val user = User(
+            id = id,
             name = name,
             email = email,
             phone = phone,

@@ -9,9 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.data.utills.NetworkUtils
+import com.example.testtask.R
 import com.example.testtask.databinding.FragmentUsersBinding
 import com.example.testtask.presentation.adapter.UserAdapter
 import com.example.testtask.presentation.model.LceState
+import android.view.animation.AnimationUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,6 +26,7 @@ class UsersFragment : Fragment() {
     private val viewModel by viewModel<UsersViewModel>()
     private lateinit var userAdapter: UserAdapter
 
+    private var currentSnackbar: Snackbar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +45,7 @@ class UsersFragment : Fragment() {
             userAdapter = UserAdapter { user ->
                 findNavController().navigate(
                     directions = UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(
+                        id = user.id,
                         name = user.name ?: "No name",
                         email = user.email ?: " No email",
                         phone = user.phone ?: "No phone",
@@ -66,24 +70,24 @@ class UsersFragment : Fragment() {
                         is LceState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.recyclerView.visibility = View.GONE
-                            binding.errorText.visibility = View.GONE
+                            databaseWarningText.visibility = View.GONE
+
                         }
 
                         is LceState.Content -> {
                             binding.progressBar.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
-                            binding.errorText.visibility = View.GONE
+                            databaseWarningText.visibility = View.GONE
                             binding.swipeRefreshLayout.isRefreshing = false
                             userAdapter.submitList(state.value)
                         }
 
                         is LceState.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            binding.recyclerView.visibility = View.GONE
-                            binding.errorText.visibility = View.VISIBLE
-
+                            databaseWarningText.apply {
+                                visibility = View.VISIBLE
+                                startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_from_top))
+                            }
                             binding.swipeRefreshLayout.isRefreshing = false
-                            binding.errorText.text = "Something went wrong: ${state.throwable.message}"
 
                             if (NetworkUtils.isInternetAvailable(requireContext())) {
                                 showSnackbar(state.throwable.localizedMessage ?: "")
@@ -98,15 +102,23 @@ class UsersFragment : Fragment() {
     }
 
     private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).apply {
+        currentSnackbar?.dismiss()
+        currentSnackbar = Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).apply {
             show()
         }.setAction("Reload") {
             viewModel.fetchUsers()
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        currentSnackbar?.dismiss()
+        viewModel.fetchUsers()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        currentSnackbar?.dismiss()
         _binding = null
     }
 }

@@ -1,30 +1,35 @@
-package com.example.domain.models.user
+package com.example.data.models
 
-data class User(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+internal data class UserEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val name: String? = null,
     val username: String? = null,
     val email: String? = null,
-    val address: Address? = null,
+    val address: AddressEntity? = null,
     val phone: String? = null,
     val website: String? = null,
-    val company: Company? = null
+    val company: CompanyEntity? = null
 )
 
-data class Address(
+internal data class AddressEntity(
     val street: String? = null,
     val suite: String? = null,
     val city: String? = null,
     val zipcode: String? = null,
-    val geo: Geo? = null
+    val geo: GeoEntity? = null
 )
 
-data class Geo(
+internal data class GeoEntity(
     val lat: String? = null,
     val lng: String? = null
 )
 
-data class Company(
+internal data class CompanyEntity(
     val name: String? = null,
     val catchPhrase: String? = null,
     val bs: String? = null

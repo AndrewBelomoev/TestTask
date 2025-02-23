@@ -7,7 +7,6 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.6.1"
-kotlinxCoroutinesCore = "1.9.0"
 loggingInterceptor = "4.10.0"
 material = "1.10.0"
 activity = "1.9.3"
@@ -15,12 +14,16 @@ constraintlayout = "2.1.4"
 jetbrainsKotlinJvm = "1.9.0"
 androidx-navigation = "2.8.7"
 retrofit = "2.9.0"
+androidx-room = "2.6.1"
 swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -38,6 +41,10 @@ androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "s
 androidx-navigation = [
     "androidx-navigation-fragment-ktx",
     "androidx-navigation-ui-ktx"
+]
+androidx-room = [
+    "androidx-room-runtime",
+    "androidx-room-ktx",
 ]
 
 [plugins]
