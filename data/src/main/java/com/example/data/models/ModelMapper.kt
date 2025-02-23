@@ -5,7 +5,7 @@ import com.example.domain.models.user.Company
 import com.example.domain.models.user.Geo
 import com.example.domain.models.user.User
 
-fun User.toDTOModel(): UserDTO {
+internal fun User.toDTOModel(): UserDTO {
     return UserDTO(
         id = id,
         name = name,
@@ -18,7 +18,7 @@ fun User.toDTOModel(): UserDTO {
     )
 }
 
-fun UserDTO.toDomainModel(): User {
+internal fun UserDTO.toDomainModel(): User {
     return User(
         id = id,
         name = name,
@@ -31,7 +31,7 @@ fun UserDTO.toDomainModel(): User {
     )
 }
 
-fun Address.toDTOModel(): AddressDTO {
+internal fun Address.toDTOModel(): AddressDTO {
     return AddressDTO(
         street = street,
         suite = suite,
@@ -41,14 +41,14 @@ fun Address.toDTOModel(): AddressDTO {
     )
 }
 
-fun Geo.toDTOModel(): GeoDTO {
+internal fun Geo.toDTOModel(): GeoDTO {
     return GeoDTO(
         lat = lat,
         lng = lng
     )
 }
 
-fun Company.toDTOModel(): CompanyDTO {
+internal fun Company.toDTOModel(): CompanyDTO {
     return CompanyDTO(
         name = name,
         catchPhrase = catchPhrase,
@@ -56,7 +56,7 @@ fun Company.toDTOModel(): CompanyDTO {
     )
 }
 
-fun AddressDTO.toDomainModel(): Address {
+internal fun AddressDTO.toDomainModel(): Address {
     return Address(
         street = street,
         suite = suite,
@@ -66,14 +66,14 @@ fun AddressDTO.toDomainModel(): Address {
     )
 }
 
-fun GeoDTO.toDomainModel(): Geo {
+internal fun GeoDTO.toDomainModel(): Geo {
     return Geo(
         lat = lat,
         lng = lng
     )
 }
 
-fun CompanyDTO.toDomainModel(): Company {
+internal fun CompanyDTO.toDomainModel(): Company {
     return Company(
         name = name,
         catchPhrase = catchPhrase,
