@@ -47,7 +47,7 @@ The project is divided into three modules:
 
 ## Testing
 
-- Unit tests are provided for the ViewModel using JUnit and Mockito.
+- Unit tests are provided for the ViewModel and repositories using JUnit and Mockito.
 - Run tests:
   ```bash
   ./gradlew test
