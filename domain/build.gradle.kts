@@ -9,5 +9,5 @@ java {
 }
 
 dependencies {
-
+    implementation (libs.kotlinx.coroutines.android)
 }
