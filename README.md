@@ -11,6 +11,7 @@ This is a simple Android application that makes an HTTP request to a public API 
 - **XML**
 - **Clean Architecture**
 - **MVVM**
+- **Navigation component**
 - **Koin**
 - **Room**
 - **JUnit**
