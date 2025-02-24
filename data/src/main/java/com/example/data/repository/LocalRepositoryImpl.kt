@@ -5,6 +5,7 @@ import com.example.data.models.toDomainModel
 import com.example.data.models.toEntityModel
 import com.example.domain.models.user.User
 import com.example.domain.repository.LocalRepository
+import kotlinx.coroutines.flow.map
 
 internal class LocalRepositoryImpl(private val dao: UserDao) : LocalRepository {
 
@@ -12,7 +13,7 @@ internal class LocalRepositoryImpl(private val dao: UserDao) : LocalRepository {
         dao.insertUsers(users = users.map { it.toEntityModel() })
     }
 
-    override suspend fun getAllUsersFromDb() = kotlin.runCatching {
+    override suspend fun getAllUsersFromDb() = runCatching {
         dao.getAllUsers()
     }.map {
         it.map { userEntity ->
@@ -20,7 +21,15 @@ internal class LocalRepositoryImpl(private val dao: UserDao) : LocalRepository {
         }
     }
 
-    override suspend fun deleteAllUsersFromDb() = kotlin.runCatching {
+    override suspend fun subscribeToChangesDb() = runCatching {
+        dao.subscribeChanges().map {
+            it.map { userEntity ->
+                userEntity.toDomainModel()
+            }
+        }
+    }
+
+    override suspend fun deleteAllUsersFromDb() = runCatching {
         dao.deleteAllUsers()
     }
 

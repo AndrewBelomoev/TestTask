@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,7 +14,6 @@ import com.example.testtask.R
 import com.example.testtask.databinding.FragmentUsersBinding
 import com.example.testtask.presentation.adapter.UserAdapter
 import com.example.testtask.presentation.model.LceState
-import android.view.animation.AnimationUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -112,8 +112,8 @@ class UsersFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+//        viewModel.fetchUsers()
         currentSnackbar?.dismiss()
-        viewModel.fetchUsers()
     }
 
     override fun onDestroyView() {
